@@ -1,0 +1,37 @@
+static string IsStandardVietNameseSyllable(this string input)
+        {
+            string[] inputArray = input.Split(' ');
+            string fileName = @"\Viet74K.txt";
+            string path = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + fileName;
+
+            string[] lines = File.ReadAllLines(path);
+
+            foreach (string item in inputArray)
+            {
+
+                bool contains = false;
+                foreach (string line in lines)
+                {
+                    string[] arrayWorkInLine = line.Split(' ');
+
+                    foreach (string work in arrayWorkInLine)
+                    {
+                        if (work.Equals(item.ToLower()))
+                        {
+                            contains = true;
+                            break;
+                        }
+                    }
+
+                }
+
+                if (!contains)
+                {
+                    Console.WriteLine("Khong chua: " + item);
+                    return item;
+                }
+                Console.WriteLine("Chua: " + item);
+            }
+
+            return input;
+        }
