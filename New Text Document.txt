@@ -1,37 +1,237 @@
-static string IsStandardVietNameseSyllable(this string input)
-        {
-            string[] inputArray = input.Split(' ');
-            string fileName = @"\Viet74K.txt";
-            string path = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + fileName;
-
-            string[] lines = File.ReadAllLines(path);
-
-            foreach (string item in inputArray)
-            {
-
-                bool contains = false;
-                foreach (string line in lines)
-                {
-                    string[] arrayWorkInLine = line.Split(' ');
-
-                    foreach (string work in arrayWorkInLine)
-                    {
-                        if (work.Equals(item.ToLower()))
-                        {
-                            contains = true;
-                            break;
-                        }
-                    }
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>jQuery Add / Remove Table Rows Dynamically</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<style>
+    form{
+        margin: 20px 0;
+    }
+    form input, button{
+        padding: 5px;
+    }
+    table{
+        width: 100%;
+        margin-bottom: 20px;
+		border-collapse: collapse;
+    }
+    table th, table td{
+        padding: 10px;
+        text-align: left;
+    }
+    table tr{
+      border:none;
+    }
+    .my-custom-scrollbar {
+        position: relative;
+        height: 200px;
+        overflow: auto;
+    }
+    .table-wrapper-scroll-y {
+        display: block;
+    }
+</style>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script>
+    $(document).ready(function(){
+      
+      $(".add-row").click(function(){
+            $("#table-new-members tbody").find('input[name="record"]').each(function(){
+            	if($(this).is(":checked")){
+                  $("#table-members-in-group tbody").append($(this).parents("tr"));
                 }
-
-                if (!contains)
-                {
-                    Console.WriteLine("Khong chua: " + item);
-                    return item;
+            });
+        });
+        
+        // Find and remove selected table rows
+        $(".delete-row").click(function(){
+            $("#table-members-in-group tbody").find('input[name="record"]').each(function(){
+            	if($(this).is(":checked")){
+                    $(this).parents("tr").remove();
                 }
-                Console.WriteLine("Chua: " + item);
-            }
+            });
+        });
+    });    
+</script>
+</head>
+<body> 
+    <div class="border">
+        <div style="height: 100px;" class="border-bottom">
+            <div class="form-group">
+                <h4>Add/Edit User Capacity In Group</h4>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label for="">Capacity Per Day: </label>
+                        <span>50</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="">Capacity In Queue: </label>
+                        <span>Yes</span>
+                    </div>
+                </div>
+                <div class="col-md-2" style="align-self: flex-end;">
+                    <div class="form-group" >
+                        <label for="">Capacity In Queue: </label>
+                        <span>Yes</span>
+                    </div>
+                </div>
+                <div class="col-md-2" style="align-self: flex-end;">
+                    <div class="form-group" >
+                        <label for="">..................: </label>
+                        <span>Yes</span>
+                    </div>
+                </div>
+                <div class="col-md-2" style="align-self: flex-end;">
+                    <div class="form-group" >
+                        <label for="">...................: </label>
+                        <span>Yes</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="height: 200px">
+            <div class="col-md-3 table-wrapper-scroll-y my-custom-scrollbar border-end" >
+                <table id="table-new-members">
+                    <thead>
+                        <tr>
+                            <th>New Member</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <input type="checkbox" name="record">
+                                <input type="text" id="name" readonly value="hieulinh">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="checkbox" name="record">
+                                <input type="text" id="name" readonly value="hieulinh2">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="checkbox" name="record">
+                                <input type="text" id="name" readonly value="hieulinh3">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="checkbox" name="record">
+                                <input type="text" id="name" readonly value="hieulinh4">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-1 table-wrapper-scroll-y my-custom-scrollbar">
+                <input type="button" class="add-row" value="Add Row">
+                <input type="button" class="delete-row" value="Remove">
+            </div>
+            <div class="col-md-8 table-wrapper-scroll-y my-custom-scrollbar border-start" >
+                <table id="table-members-in-group">
+                    <thead>
+                        <tr>
+                            <th>Members in Group</th>
+                            <th>Capacity Per Days</th>
+                            <th>Quantity in Queue</th>
+                            <th>..........</th>
+                            <th>..........</th>
+                        </tr>
+                    </thead>
+                    <tbody >
+                    </tbody>
+                </table>
+            </div>
+            
+        </div>
+    </div> 
 
-            return input;
-        }
+
+    <!-- <table class="border">
+        <thead>
+            <tr>
+                <th>
+                    <h4>Add/Edit User Capacity In Group</h4>
+                    Members in Group: 
+                </th>
+            </tr>
+            <tr>
+                <th>Capacity Per Days: </th>
+                <th>Quantity in Queue: </th>
+                <th>..........: </th>
+                <th>..........: </th>
+            </tr>
+        </thead>
+        <tbody >
+            <tr class="border-top">
+                <td class="border-end">
+                    <table id="table-new-members" class="table-wrapper-scroll-y my-custom-scrollbar">
+                        <thead>
+                            <tr>
+                                <th>New Member</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <input type="checkbox" name="record">
+                                    <input type="text" id="name" readonly value="hieulinh">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="checkbox" name="record">
+                                    <input type="text" id="name" readonly value="hieulinh2">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="checkbox" name="record">
+                                    <input type="text" id="name" readonly value="hieulinh3">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="checkbox" name="record">
+                                    <input type="text" id="name" readonly value="hieulinh4">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+                <td class="border-end">
+                    <input type="button" class="add-row" value="Add">
+                    <br>
+                    <input type="button" class="delete-row" value="Remove">
+                </td>
+                <td class="d-inline-flex">
+                    <table id="table-members-in-group" class="table-wrapper-scroll-y my-custom-scrollbar">
+                        <thead>
+                            <tr>
+                                <th>Members in Group</th>
+                                <th>Capacity Per Days</th>
+                                <th>Quantity in Queue</th>
+                                <th>..........</th>
+                                <th>..........</th>
+                            </tr>
+                        </thead>
+                        <tbody >
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+            
+
+            
+        </tbody>
+    </table> -->
+    
+    
+</body> 
+</html>
