@@ -11,6 +11,7 @@ namespace merge
         static void Main(string[] args)
         {
             Console.WriteLine("linh");
+            Console.WriteLine("linh2");
         }
     }
 }
