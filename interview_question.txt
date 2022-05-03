@@ -1,0 +1,206 @@
+1. .NET core advantages over the .NET Framework ?
+https://www.c-sharpcorner.com/article/difference-between-net-framework-and-net-core/
+-A high-performance and scalable system without UI				.NET Core is much faster.
+-Docker containers support 							Both, but .NET Core is born to live in a container.
+-Heavily rely on the command line						.NET Core has better support.
+-Cross-platform needs								.NET Core
+-Using Microservices								Both, but .NET Core is designed to keep today's needs in mind.
+-User interface centric Web applications					.NET Framework is better now until .NET Core catches up.
+-Windows client applications using Windows Forms and WPF			.NET Framework
+Already have a pre-configured environment and systems				.NET Framework is better.
+Stable version for an immediate need to build and deploy			.NET Framework has been around since 2001. .NET Core is just a baby.
+Have existing experienced .NET team						.NET Core has a learning curve.
+Time is not a problem. Experiments are acceptable. No rush to deployment.	.NET Core is the future of .NET.
+
+2. Tell me about .NET memory management concept ?
+- Garbage collector
+
+3. Why do we need to use 'using' and IDiposeable interface for Unmanaged resources ?
+# https://www.jetbrains.com/help/dotmemory/NET_Memory_Management_Concepts.html
+# https://medium.com/c-programming/c-memory-management-part-1-c03741c24e4b
+# https://medium.com/c-programming/c-memory-management-part-2-finalizer-dispose-d3b3e43c08d1
+# https://medium.com/c-programming/c-memory-management-part-3-garbage-collection-18faf118cbf1
+4. What are Managed resources & Unmanaged resources ?
+# https://stackoverflow.com/questions/3607213/what-is-meant-by-managed-vs-unmanaged-resources-in-net#:~:text=Managed%20resources%20are%20those%20that,COM%20objects%2C%20database%20connections%20etc.
+	maneged: có garbage collector
+	unmanaged: k có garbage collector =>(using)
+5. How does a C# Projects is compiled into executable bytes code for the machine ? 
+differences between JIT and AOT compiler ?
+# https://comdy.vn/c-sharp/common-language-runtime-clr-trong-c-sharp/
+# https://stackoverflow.com/questions/41450226/just-in-time-jit-vs-ahead-of-time-aot-compilation-in-angular
+Just in time compiler provides compilation during
+the execution of the program at a run time before execution. In simple words,
+code get compiles when it’s needed, not at the build time.
+Ahead of Time compiler converts your code during the build time before your 
+browser downloads and runs that code.
+
+6. Differences between Authentication & Authorization ?
+	- authen: verify the account,
+	- author: check resources a user can access
+7. How do you implement Authentication & Authorization in ASP.NET core ?
+	- Identity
+# Authentication: https://docs.microsoft.com/en-us/aspnet/core/security/authentication/?view=aspnetcore-5.0
+# Authorization: https://docs.microsoft.com/en-us/aspnet/core/security/authorization/introduction?view=aspnetcore-5.0
+# Authorize attribute with AND/OR : https://stackoverflow.com/questions/17272422/multiple-authorization-attributes-on-method
+# https://www.c-sharpcorner.com/article/policy-based-role-based-authorization-in-asp-net-core/
+
+8. Do you know about the OAuth 2 ? Describe the basic workflow ?
+	- The application sends an authorization request to access Resource Server based on the user.
+	- The User will verify and respond token string(Authorization Grant)
+	- Next, the application will send a token string to the Authorization Server, AS verify and respond token-access.
+	- Final, the application sends a token-access to Resource Server, if valid will respond to data
+# https://viblo.asia/p/introduction-to-oauth2-3OEqGjDpR9bL
+
+9. Have you ever worked with JWT or Bearer token ? Advantages of JWT over the Session ?
+	
+# https://viblo.asia/p/json-web-tokens-jwt-vs-sessions-4dbZN0Mg5YM
+
+10. Which information should we check when validating a JWT ?
+# Check that the JWT is well formed.
+# Check the signature.
+# Check the standard claims.
+---------------------------------------------------------------------------------------------------------
+11. [Advanced] Do you know about the Single Sign On (SSO) ? Describe the basic workflow ?
+	- userlinh login đến domain1 -> domain1 lấy thông tin login redirect to center domain 
+	-> center domain will authentication and save session -> response session for domain1 to access
+	- userlinh login đến domain2 -> domain2 lấy thông tin login redirect to center domain
+	-> center domain check was authentication -> was authen then for access domain2, otherwise authen, save session and response for domain2
+# https://techmaster.vn/posts/34688/xac-thuc-single-sign-on-la-gi-va-no-hoat-dong-nhu-the-nao
+---------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------
+12. [Advanced] What if the authentication server which generates JWTs 
+has a different timezone from other servers? How do you solve that issue ? (clock skew)
+# https://stackoverflow.com/questions/47153080/clock-skew-and-tokens
+---------------------------------------------------------------------------------------------------------
+13. Do you know about Dependency Injection (DI) in ASP.NET core?
+Can you tell me about the differences between Transient, Scoped, Singleton?
+# https://docs.microsoft.com/en-us/dotnet/core/extensions/dependency-injection#service-lifetimes
+# https://docs.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection?view=aspnetcore-5.0
+# https://stackoverflow.com/questions/56143613/inject-generic-interface-in-net-core
+---------------------------------------------------------------------------------------------------------
+14. [Advanced] How do you implement Dependency Injection in Multi-Tenant Architecture ?
+# http://dangthanhphongtech.blogspot.com/2019/03/tong-quan-multi-tenancy.html
+# https://gunnarpeipman.com/aspnet-core-tenant-based-dependency-injection/
+---------------------------------------------------------------------------------------------------------
+
+15. Do you know about Middleware? 
+How can you track all requests and responses which go in and out from your server?
+- Middleware: 
+    # https://docs.microsoft.com/en-us/aspnet/core/fundamentals/middleware/?view=aspnetcore-5.0
+    # https://riptutorial.com/asp-net-core/example/20718/run--map--use
+- HTTP Logging
+    # Built-In: https://docs.microsoft.com/en-us/aspnet/core/fundamentals/http-logging/?view=aspnetcore-6.0
+    # Custom middleware: https://referbruv.com/blog/posts/logging-http-request-and-response-in-aspnet-core-using-middlewares
+
+16. Have you ever used Entity Framework (EF) Core ?
+- IEnumerable vs IQueryable ?
+    # https://www.tutorialspoint.com/what-is-the-difference-between-ienumerable-and-iqueryable-in-chash
+- Giải thích deferred execution
+    # https://www.tutorialsteacher.com/linq/linq-deferred-execution
+- Lazy loading vs Eager loading ? (Problem N+1)
+    # Lazy, Eager, Explicit: https://www.c-sharpcorner.com/article/eager-loading-lazy-loading-and-explicit-loading-in-entity-framework/
+    # N + 1 Problem of Lazy: https://www.brentozar.com/archive/2018/07/common-entity-framework-problems-n-1/
+- Implement Eager Loading như thế nào ?
+    # https://docs.microsoft.com/en-us/ef/core/querying/related-data/eager
+    # Split query of Eager: https://henriquesd.medium.com/entity-framework-core-5-split-queries-2b7f6c729c8f
+- Cách EF quản lý Transaction ? Cách sử dụng Transaction với EF như thế nào ?
+    # https://docs.microsoft.com/en-us/ef/core/saving/transactions
+- Cách EF quản lý Concurrency ? Cách sử dụng Concurrency với EF như thế nào ?
+    # https://docs.microsoft.com/en-us/ef/core/saving/concurrency
+	1.Catch DbUpdateConcurrencyException during SaveChanges.
+	2.Use DbUpdateConcurrencyException.Entries to prepare a new set of changes for the affected entities.
+	3.Refresh the original values of the concurrency token to reflect the current values in the database.
+	4.Retry the process until no conflicts occur.
+- Cách EF query xuống DB như thế nào khi bạn viết câu LinQ ?
+    # https://stackoverflow.com/questions/671235/how-linq-works-internally
+- TPT, TPH
+    # https://blog.devart.com/table-per-type-vs-table-per-hierarchy-inheritance.html
+
+17. How do you connect to a database ? Which protocol is being used ? Describe the mechanism ?
+# https://docs.microsoft.com/en-us/dotnet/framework/data/adonet/data-providers
+# https://docs.microsoft.com/en-us/dotnet/framework/data/adonet/establishing-the-connection
+# https://docs.microsoft.com/en-us/dotnet/framework/data/adonet/connection-events
+
+18. What is N-Tiers architecture? which tiers do a repository,  a service, and a controller belong to?
+how can they communicate with each other?
+# https://stackoverflow.com/questions/312187/what-is-n-tier-architecture
+
+19. Do you know these keywords: Async, Await, Lock, Wait và SynchronizationContext in ASP.NET Core ?
+	- asynchronour:
+	+implement multiple task at one time
+	+enhance the responsiveness
+	+avoid performance bottlenecks(tránh tắc nghẽn hiệu suất)
+# https://code-maze.com/asynchronous-programming-with-async-and-await-in-asp-net-core/
+# https://stackoverflow.com/questions/9519414/whats-the-difference-between-task-start-wait-and-async-await
+# https://stackoverflow.com/questions/18097471/what-does-synchronizationcontext-do
+
+20. Have you ever used Job scheduler ?
+# HangFire for .NET core
+# Quatz for .NET
+
+21. Executing an SQL statement on a database server is faster than on memory, why ?
+# https://docs.microsoft.com/en-us/ef/core/querying/client-eval
+# https://entityframeworkcore.com/querying-data-evaluation-client-server
+# https://dev.to/granthair5/why-your-ef-core-code-is-now-breaking-aka-the-pesky-tolist-4766
+
+22. SQL keywords: Exists, Contains (vs Like) ?
+# https://www.w3schools.com/sql/sql_exists.asp
+# https://stackoverflow.com/questions/7510646/like-vs-contains-on-sql-server/7510685
+
+23. How do you optimize database query statement ?
+# https://docs.microsoft.com/en-us/ef/core/performance/efficient-querying
+# Lazy loading (not prefer because of N+1 problem)
+# Eager loading with Split query
+
+24. How do you evaluate the performance of a query ? (execution plan)
+Get the actual query by logging: 
+#https://www.entityframeworktutorial.net/efcore/logging-in-entityframework-core.aspx
+Execute the query in SSMS/VS and show the Execution plan: 
+#https://docs.microsoft.com/en-us/sql/relational-databases/performance/display-an-actual-execution-plan?view=sql-server-ver15
+
+25. Microservices vs Monolith
+# https://www.geeksforgeeks.org/monolithic-vs-microservices-architecture/
+
+26. What is design pattern ? Have you ever used it ?
+# https://www.dofactory.com/net/design-patterns
+
+27. Software development principles ?
+# SOLID -> most important
+	- Single Reposibility: A class should only hold 1 responsibility
+	- Open/Closed: a class can open for extension but closed for modification
+	- Liskov substitution: Objects of the child class can replace the parent class without changing the correctness of the program
+		ex: class DUCK, DUCK fly and DUCK swim can inherit DUCK class, but DONALD DUCK can not	
+	- Interface Segregation: split a large interface into many small interfaces, with many specific purposes
+	- Dependency Inversion: 
+		+ High-level and low-level modules should depend on abstractions
+		+ Classes should communicate via interface
+# DRY (Dont repeat yourseft)
+# KISS (Keep it simple stupid)
+# YAGNI (You aren't gonna need it)
+
+28. OOP characteristics ?
+	- Encapsulation: access limit with  access modifiers: public,private,protected,internal,protected internal, private protected
+	- Inheritance
+	- Polymorphim
+		. overloading: nạp chồng(method overloading & operation overloading): compile time, add behavior
+		. overriding: ghi đè(method overriding): runtime, change behavior
+	- Abstraction
+# https://viblo.asia/p/4-dac-tinh-cua-lap-trinh-huong-doi-tuong-object-oriented-program-XL6lAA7Nlek
+
+29. How does HashTable work ?
+# https://nguyenvanhieu.vn/bang-bam-hash-tables/
+
+30. C# Interview questions
+# https://www.c-sharpcorner.com/UploadFile/puranindia/C-Sharp-interview-questions/
+
+31. ExceptionFilter: exception tập trung
+
+32. struct vs class
+- struct: 							class
+	+ value type						+ reference type
+	+ small data						+ large data
+	+ can not inherited, abstract, create constructor	+ can
+32. Arrat.CopyTo() vs Array.Clone()
+	- Clone: creates a shallow copy of array, reference to old array 
+	- CopyTo => copy to new array
+	

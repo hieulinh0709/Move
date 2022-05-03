@@ -1,0 +1,4 @@
+https://datatables.net/
+https://codeseven.github.io/toastr/demo.html
+https://sweetalert2.github.io/
+https://jqueryui.com/datepicker/
